@@ -1,0 +1,14 @@
+<div class="create-product-wrapper">
+	<div class="input-wrapper">
+		<input type="text" [(ngModel)]="formData.name" placeholder="Name">
+	</div>
+	<div class="input-wrapper">
+		<input type="text" [(ngModel)]="formData.price" placeholder="Price">
+	</div>
+	<div class="input-wrapper">
+		<textarea placeholder="Description" [(ngModel)]="formData.description"></textarea>
+	</div> 
+	<div class="button-wrapper">
+		<button (click)="submitForm()">SUBMIT</button>
+	</div>
+</div>

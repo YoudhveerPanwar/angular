@@ -11,13 +11,19 @@ import { products } from '../products';
 export class ProductDetailsComponent implements OnInit {
   product;
 
+  public productList = products;
   constructor(
     private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
+    let productList = localStorage.getItem('productList');
+    if(productList) {
+      this.productList = JSON.parse(productList);
+    }
+
       this.route.paramMap.subscribe(params => {
-      this.product = products[+params.get('productId')];
+      this.product = this.productList[+params.get('productId')];
     });
   }
 

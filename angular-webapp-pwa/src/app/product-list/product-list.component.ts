@@ -8,7 +8,17 @@ import { products } from '../products';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent {
+  
   products = products;
+
+  constructor() {
+    let productList = localStorage.getItem('productList');
+    if(productList) {
+      this.products = JSON.parse(productList);
+    }else{
+      localStorage.setItem('productList', JSON.stringify(this.products));
+    }
+  }
 
   share() {
     window.alert('The product has been shared!');
