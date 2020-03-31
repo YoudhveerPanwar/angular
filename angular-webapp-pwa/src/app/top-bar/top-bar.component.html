@@ -1,6 +1,7 @@
 <a [routerLink]="['/']">
   <h1>ISA Store</h1>
 </a>
+<a *ngIf='isLoggedIn' class="button fancy-button" (click)='logout()'>Logout</a>
 
 <a [routerLink]="['/cart']" class="button fancy-button"><i class="material-icons">shopping_cart</i>Checkout</a>
 

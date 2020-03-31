@@ -10,14 +10,20 @@ import { ProductAlertsComponent } from './product-alerts/product-alerts.componen
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { LoginComponent } from './login/login.component';
+import { LoginGuardGuard } from './login/login-guard.guard';
 
 @NgModule({
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: ProductListComponent },
-      { path: 'products/productId:', component: ProductDetailsComponent },
+      { path: '', redirectTo:'login', pathMatch:'full' },
+      { path: 'products/productId:', component: ProductDetailsComponent ,canActivate:[LoginGuardGuard]},
+      { path:'products', component: ProductListComponent, canActivate:[LoginGuardGuard]},
+      { path:'login', component: LoginComponent},
+      { path:'**', redirectTo: '',pathMatch:'full'}
+
     ]),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
@@ -26,7 +32,8 @@ import { environment } from '../environments/environment';
     TopBarComponent,
     ProductListComponent,
     ProductAlertsComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    LoginComponent
   ],
   bootstrap: [ AppComponent ]
 })

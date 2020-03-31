@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginServiceService } from '../login/login-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-top-bar',
@@ -7,10 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private loginService: LoginServiceService,private router: Router) { }
+
+  isLoggedIn:boolean
 
   ngOnInit() {
+    this.loginService.isLoggedObs.subscribe(data=>{
+      this.isLoggedIn=data;
+    });
   }
+logout(){
+  this.loginService.setLoggedIn(false);
+  this.router.navigate(['']);
+}
 
 }
 
