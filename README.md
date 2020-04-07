@@ -22,3 +22,4 @@ Test repo
 # Coding Instructions
 1. Add product and Login feature should have their own folders as a reusable components- see existing compenents and their package structures
 2. Solution should be responsive, current app is already responsive
+3. New features should not break existing features
