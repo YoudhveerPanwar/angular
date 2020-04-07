@@ -1,6 +1,12 @@
 # angular
 Test repo
 
+# Existing Features
+1. Product Listing
+2. Product Details
+3. Notify/Alert
+4. Responsive design - Mobile, Desktop, Tablets
+
 # For assigment seekers
 1.  Fork this repo
 2.  Create a separate branch named as 'login-feature'
