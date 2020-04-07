@@ -1,8 +1,10 @@
 <a [routerLink]="['/']">
-  <h1>ISA Store</h1>
+  <h1 *ngIf="!loggedIn">ISA Store</h1>
+  <h1 *ngIf="loggedIn">Welcome to ISA Store</h1>
 </a>
+<a *ngIf="loggedIn" (click)="logOut()" class="button fancy-button logout"><i class="material-icons"></i>Logout</a>
+<a *ngIf="loggedIn" [routerLink]="['/cart']" class="button fancy-button"><i class="material-icons">shopping_cart</i>Checkout</a>
 
-<a [routerLink]="['/cart']" class="button fancy-button"><i class="material-icons">shopping_cart</i>Checkout</a>
 
 <!-- 
 Copyright Google LLC. All Rights Reserved.
