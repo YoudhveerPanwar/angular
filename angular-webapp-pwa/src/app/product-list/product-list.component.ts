@@ -1,14 +1,30 @@
-import { Component } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
 import { products } from '../products';
+import { Router } from '@angular/router';
+import { AuthService, SocialUser } from 'angularx-social-login';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent {
+export class ProductListComponent implements OnInit {
   products = products;
+  user: SocialUser;
+  constructor(private router: Router,
+              private authService: AuthService
+  ) {}
+
+  ngOnInit() {
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      if (this.user) {
+        this.router.navigate(['/listing']);
+      } else {
+        this.router.navigate(['/login']);
+      }
+    });
+  }
 
   share() {
     window.alert('The product has been shared!');

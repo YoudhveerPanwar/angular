@@ -10,14 +10,31 @@ import { ProductAlertsComponent } from './product-alerts/product-alerts.componen
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider } from 'angularx-social-login';
+
+const config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider('564554496076-vrhgbmm3r93enndihkn5dp7gckb84g4f.apps.googleusercontent.com')
+  }
+]);
+
+export function provideConfig() {
+  return config;
+}
 
 @NgModule({
   imports: [
     BrowserModule,
+    SocialLoginModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: ProductListComponent },
-      { path: 'products/productId:', component: ProductDetailsComponent },
+      { path: '', redirectTo: '/login' , pathMatch: 'full'},
+      { path: 'login', component: LoginPageComponent },
+      { path: 'listing', component: ProductListComponent },
+      { path: 'products/:productId:', component: ProductDetailsComponent },
     ]),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
@@ -26,7 +43,14 @@ import { environment } from '../environments/environment';
     TopBarComponent,
     ProductListComponent,
     ProductAlertsComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    LoginPageComponent
+  ],
+  providers: [
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
+    }
   ],
   bootstrap: [ AppComponent ]
 })

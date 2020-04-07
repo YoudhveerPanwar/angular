@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService, SocialUser } from 'angularx-social-login';
 
 @Component({
   selector: 'app-top-bar',
@@ -6,12 +8,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./top-bar.component.css']
 })
 export class TopBarComponent implements OnInit {
-
-  constructor() { }
+  user: SocialUser;
+  loggedIn = false;
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      if (this.user) {
+        this.loggedIn = true;
+      } else {
+        this.loggedIn = false;
+      }
+    });
   }
 
+  logOut() {
+    this.authService.signOut();
+  }
 }
 
 
