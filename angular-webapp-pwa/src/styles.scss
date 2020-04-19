@@ -58,6 +58,13 @@ input {
 	margin-bottom: 16px;
 	border: 1px solid #BDBDBD;
 }
+textarea {
+	font-size: 14px;
+	border-radius: 2px;
+	padding: 8px;
+	margin-bottom: 16px;
+	border: 1px solid #BDBDBD;
+}
 label {
 	font-size: 12px;
 	font-weight: bold;
@@ -123,6 +130,9 @@ app-top-bar {
 	h1 {
 		color: white;
 		margin: 0;
+	}
+	.right-wrap{
+		display: flex;
 	}
 }
 .cart-item {
